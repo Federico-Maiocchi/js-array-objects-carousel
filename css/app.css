@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    aspect-ratio: 21/9;
+    object-fit: cover;
+} 
+
+.image {
+    width: 100%;
+    display: none;
+    aspect-ratio: 21/9;
+    object-fit: cover ;
+}
+
+.active {
+    display: block;
+}
+
+.main-header {
+    padding-top: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+} 
+
+.container {
+    max-width: 900px;
+    height: 100%;
+}
+
+.gallery {
+    position: relative;
+}
+
+.biography {
+    position: absolute;
+    right: 5%;
+    bottom: 25%;
+    z-index: 1;
+    text-align: end;
+    color: white;
+
+
+    
+}
+
+.gallery-small {
+    position: relative;
+}
+
+button {
+    font-size: 30px;
+    border: none;
+    background: transparent;
+    color: lightyellow;
+    cursor: pointer;
+    z-index: 100;
+    left:0;
+    right: 0;
+}
+
+.btn-up {
+    position: absolute;
+    top: 5px;
+}
+
+.btn-down {
+    position: absolute;
+    bottom: 5px;
+}
+
+.container-small {
+    max-width: 174px;
+}
+
