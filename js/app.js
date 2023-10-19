@@ -60,14 +60,15 @@ images.forEach((usersCurrent, index) => {
     // console.log(text);
 
     const htmlStringImages = `
-    <div class="image">
-        <img src="./${image}" alt="${title}">
+    <div class="wrapper-image">
+        <div class="image">
+            <img src="./${image}" alt="${title}">
+        </div>
+        <span class="biography">
+            <h1 class="title-image">${title}</h1>
+            <p class="paragraph-image">${text}</p>
+        </span>
     </div>
-    <span class="biography">
-        <h1 class="title-image">${title}</h1>
-        <p class="paragraph-image">${text}</p>
-    </span>
-    
     `
     // console.log(htmlStringImages);
 
@@ -77,57 +78,96 @@ images.forEach((usersCurrent, index) => {
 })
 
 // seleziono tutti gli elementi del dom 
-const imageSelectDomElement = document.querySelectorAll ('.image');
+const imageSelectDomElements = document.querySelectorAll('.wrapper-image');
 // console.log(imageSelectDomElement);
-
-// attivo la prima immagine con la class active, gli altri elementi hanno display none
-let firstCurrent = imageSelectDomElement[0];
-firstCurrent.classList.add('active');
 
 // indichiamo la prima immaggine che ha valore 0 nell' array 
 let indexImageCurrent = 0;
 
+// attivo la prima immagine con la class active, gli altri elementi hanno display none
+let firstCurrent = imageSelectDomElements[indexImageCurrent];
+firstCurrent.classList.add('active');
+
+
+
+
 // recuperiamo il bottone inferiore dal dom
 const btnDownDocElement = document.querySelector('.btn-down');
 
-// diamo la funzione al dom di scroll,ogni click corrisponde ad una foto
-btnDownDocElement.addEventListener('click', addRemoveBtn(indexImageCurrent, ++))
-// {
-    
-    // // rimuovo la classe active dall'elemento corrente
-    // imageSelectDomElement[indexImageCurrent].classList.remove('active');
+// recupero dal dom il bottone superiore
+const btnUpDocElement = document.querySelector('.btn-up');
 
-    // // scalo gli elemnti correnti con il ++ in modo crescente
-    // indexImageCurrent++;
-    // // console.log(indexCorrent)
-
-    // // se l'indice corrente se è unguale alla lunghezza, allora prosegue
-    // if (indexImageCurrent == imageSelectDomElement.length ) {
-    //     // per poi ritornare al punto di partenza
-    //     indexImageCurrent = 0;
-    // } 
-
-    // // assegno alla imagine seguente la classe active
-    // imageSelectDomElement[indexImageCurrent].classList.add('active');
-
-// })
-
-
-function addRemoveBtn(index, change){
-    const currentElement = document.querySelector('active');
-    // rimuovo la classe active dall'elemento corrente
-    currentElement.classList.remove('active');
-
-    // scalo gli elemnti correnti con il ++ in modo crescente
-    `${index} ${change}`;
-    // console.log(indexCorrent)
-
-    // se l'indice corrente se è unguale alla lunghezza, allora prosegue
-    if (index == images.length ) {
-        // per poi ritornare al punto di partenza
-        index = 0;
-    } 
-
-    // assegno alla imagine seguente la classe active
-    currentElement.classList.add('active');
+// funzione per decrementare e incrementare
+function updateCurrentIndex(change) {
+    // incremento
+    if (change === 'plus') {
+        if (indexImageCurrent === imageSelectDomElements.length - 1) {
+            indexImageCurrent = 0;
+        } else {
+            indexImageCurrent++;
+        }
+    // Cambia decremento    
+    } else if (change === 'minus') {  
+        if (indexImageCurrent === 0) {
+            indexImageCurrent = imageSelectDomElements.length - 1;
+        } else {
+            indexImageCurrent--;
+        }
+    }
 }
+
+
+// Aggiorna le chiamate alle funzioni addRemoveBtn nei gestori di eventi
+btnDownDocElement.addEventListener('click', function () {
+    
+    // 'plus' perché vuoi incrementare l'indice quando premi "down"
+    addRemoveBtn('plus');
+    
+});
+
+btnUpDocElement.addEventListener('click', function () {
+    // 'minus' perché vuoi decrementare l'indice quando premi "up"
+    addRemoveBtn('minus');  
+});
+
+
+
+function addRemoveBtn(change) {
+    imageSelectDomElements[indexImageCurrent].classList.remove('active');
+    updateCurrentIndex(change);
+    imageSelectDomElements[indexImageCurrent].classList.add('active');
+}
+
+
+// function updateCurrentIndex(change) {
+
+//     console.log('Before:', indexImageCurrent);
+
+//     if (change === 'plus') {
+        
+//         if (indexImageCurrent === imageSelectDomElements.length - 1) {
+//             indexImageCurrent = 0;
+//         } else {
+//             indexImageCurrent++;
+//         }
+
+//     } else {
+//         if (indexImageCurrent === 0) {
+//             indexImageCurrent = imageSelectDomElements.length - 1;
+//         } else {
+//             indexImageCurrent--;
+//         }
+//     }
+
+//     console.log('After:', indexImageCurrent);
+   
+// }
+
+
+// function addRemoveBtn(change){
+//     imageSelectDomElements[indexImageCurrent].classList.remove('active');
+//     updateCurrentIndex(change);
+//     imageSelectDomElements[indexImageCurrent].classList.add('active');
+
+    
+// }

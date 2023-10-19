@@ -10,9 +10,12 @@ img {
     object-fit: cover;
 } 
 
+.wrapper-image {
+    display: none;   
+}
+
 .image {
     width: 100%;
-    display: none;
     aspect-ratio: 21/9;
     object-fit: cover ;
 }
